@@ -15,7 +15,7 @@ lazy val core = project
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
-    addSbtPlugin("com.eed3si9n"        % "sbt-unidoc"      % Versions.sbtUnidoc),
+    addSbtPlugin("com.github.sbt"        % "sbt-unidoc"      % Versions.sbtUnidoc),
     addSbtPlugin("com.github.tkawachi" % "sbt-doctest"     % Versions.sbtDoctest),
     addSbtPlugin("com.typesafe.sbt"    % "sbt-ghpages"     % Versions.sbtGhPages),
     addSbtPlugin("com.typesafe.sbt"    % "sbt-site"        % Versions.sbtSite),

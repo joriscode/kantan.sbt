@@ -9,7 +9,7 @@ object Versions {
   val sbtScalafmt: String  = "2.4.6"
   val sbtSite: String      = "1.4.1"
   val sbtSonatype: String  = "3.9.11"
-  val sbtUnidoc: String    = "0.4.3"
+  val sbtUnidoc: String    = "0.5.0"
   val scalajs: String      = "1.9.0"
   val scalajsCross: String = "1.1.0"
   val scalastyle: String   = "1.0.0"
