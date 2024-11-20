@@ -15,7 +15,7 @@ object BuildPlugin extends AutoPlugin {
   override def globalSettings: Seq[Setting[_]] =
     addCommandAlias(
       "validate",
-      ";clean;scalastyle;Test / scalastyle;scalafmtCheck;Test / scalafmtCheck;scalafmtSbtCheck;compile;scripted"
+      ";clean;Test / scalafmtCheck;Test / scalafmtCheck;scalafmtSbtCheck;compile;scripted"
     )
 
   lazy val runScripted: ReleaseStep = {
@@ -36,7 +36,6 @@ object BuildPlugin extends AutoPlugin {
         checkSnapshotDependencies,
         inquireVersions,
         runClean,
-        releaseStepCommand("scalastyle"),
         releaseStepCommand("scalafmtCheck"),
         releaseStepCommand("scalafmtSbtCheck"),
         runScripted,

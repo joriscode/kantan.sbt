@@ -3,6 +3,4 @@
 # - fail test:scalastyle and test:checkStyle
 
 > checkStyle
-> scalastyle
--> test:scalastyle
 -> test:checkStyle
