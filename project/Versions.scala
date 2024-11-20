@@ -1,8 +1,8 @@
 object Versions {
   val boilerplate: String  = "0.6.1"
   val mdoc: String         = "2.6.1"
-  val sbtDoctest: String   = "0.9.9"
-  val sbtGhPages: String   = "0.6.3"
+  val sbtDoctest: String   = "0.10.0"
+  val sbtGhPages: String   = "0.8.0"
   val sbtHeader: String    = "5.6.5"
   val sbtPgp: String       = "2.1.1"
   val sbtRelease: String   = "1.1.0"
