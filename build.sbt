@@ -41,18 +41,6 @@ lazy val release = project
   )
   .dependsOn(core)
 
-// lazy val scalastyle = project
-//   .settings(
-//     moduleName := "kantan.sbt-scalastyle",
-//     name       := "scalastyle",
-//     sbtPlugin  := true
-//   )
-//   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
-//   .settings(
-//     addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % Versions.scalastyle)
-//   )
-//   .dependsOn(core)
-
 lazy val scalafmt = project
   .settings(
     moduleName := "kantan.sbt-scalafmt",
