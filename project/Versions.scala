@@ -1,6 +1,6 @@
 object Versions {
   val boilerplate: String  = "0.6.1"
-  val mdoc: String         = "2.3.8"
+  val mdoc: String         = "2.6.1"
   val sbtDoctest: String   = "0.9.9"
   val sbtGhPages: String   = "0.6.3"
   val sbtHeader: String    = "5.6.5"
@@ -13,6 +13,6 @@ object Versions {
   val scalajs: String      = "1.9.0"
   val scalajsCross: String = "1.1.0"
   val scalastyle: String   = "1.0.0"
-  val scoverage: String    = "1.9.3"
-  val wartRemover: String  = "2.4.21"
+  val scoverage: String    = "2.2.2"
+  val wartRemover: String  = "3.2.4"
 }

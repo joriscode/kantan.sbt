@@ -23,7 +23,8 @@ lazy val core = project
     addSbtPlugin("io.spray"            % "sbt-boilerplate" % Versions.boilerplate),
     addSbtPlugin("org.scalameta"       % "sbt-mdoc"        % Versions.mdoc),
     addSbtPlugin("org.scoverage"       %% "sbt-scoverage"  % Versions.scoverage),
-    addSbtPlugin("org.wartremover"     % "sbt-wartremover" % Versions.wartRemover)
+    // addSbtPlugin("org.wartremover"     % "sbt-wartremover" % Versions.wartRemover)
+    libraryDependencies += "org.wartremover" % "sbt-wartremover_2.12_1.0" % "3.2.4"
   )
 
 lazy val release = project
