@@ -13,7 +13,7 @@ lazy val core = project
     name       := "core",
     sbtPlugin  := true
   )
-  .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
+  .enablePlugins(AutomateHeaderPlugin, SbtPlugin, WartRemover)
   .settings(
     addSbtPlugin("com.eed3si9n"        % "sbt-unidoc"      % Versions.sbtUnidoc),
     addSbtPlugin("com.github.tkawachi" % "sbt-doctest"     % Versions.sbtDoctest),
