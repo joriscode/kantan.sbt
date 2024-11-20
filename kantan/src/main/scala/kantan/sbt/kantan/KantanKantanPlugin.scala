@@ -17,7 +17,8 @@
 package kantan.sbt.kantan
 
 import com.jsuereth.sbtpgp.PgpKeys.publishSigned
-import com.typesafe.sbt.SbtGit.git
+// import com.typesafe.sbt.SbtGit.git
+import com.github.sbt.git.SbtGit.git
 import kantan.sbt.release.KantanRelease
 import kantan.sbt.scalafmt.KantanScalafmtPlugin, KantanScalafmtPlugin.autoImport._
 import kantan.sbt.scalastyle.KantanScalastylePlugin, KantanScalastylePlugin.autoImport._
@@ -86,9 +87,9 @@ object KantanKantanPlugin extends AutoPlugin {
 
   /** Remote identifiers, computed from [[autoImport.kantanProject]]. */
   lazy val remoteSettings: Seq[Setting[_]] = Seq(
-    homepage       := Some(url(s"https://nrinaudo.github.io/kantan.${kantanProject.value}")),
-    apiURL         := Some(url(s"https://nrinaudo.github.io/kantan.${kantanProject.value}/api/")),
-    git.remoteRepo := s"git@github.com:nrinaudo/kantan.${kantanProject.value}.git",
+    homepage      := Some(url(s"https://nrinaudo.github.io/kantan.${kantanProject.value}")),
+    apiURL        := Some(url(s"https://nrinaudo.github.io/kantan.${kantanProject.value}/api/")),
+    gitRemoteRepo := s"git@github.com:nrinaudo/kantan.${kantanProject.value}.git",
     scmInfo := Some(
       ScmInfo(
         url(s"https://github.com/nrinaudo/kantan.${kantanProject.value}"),
