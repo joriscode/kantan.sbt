@@ -6,6 +6,7 @@ addSbtPlugin("org.scalameta"     % "sbt-scalafmt" % "2.5.2")
 addSbtPlugin("de.heikoseeberger" % "sbt-header"   % "5.10.0")
 // addSbtPlugin("com.typesafe.sbt"  % "sbt-ghpages"            % "0.6.3")
 // addSbtPlugin("com.typesafe.sbt"  % "sbt-site"               % "1.4.1")
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.11")
+// addSbtPlugin("org.xerial.sbt" % "sbt-sonatype"           % "3.11.2")
+addSbtPlugin("org.jmotor.sbt" % "sbt-dependency-updates" % "1.2.9")
 
 libraryDependencies += "org.scala-sbt" %% "scripted-plugin" % sbtVersion.value

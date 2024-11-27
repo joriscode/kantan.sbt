@@ -17,7 +17,7 @@ lazy val core = project
   .settings(
     libraryDependencySchemes += "com.lihaoyi" %% "geny" % VersionScheme.Always,
     // addSbtPlugin("com.eed3si9n"        % "sbt-unidoc"      % Versions.sbtUnidoc),
-    addSbtPlugin("com.github.tkawachi" % "sbt-doctest" % Versions.sbtDoctest),
+    addSbtPlugin("com.github.tkawachi" % "sbt-doctest" % Versions.sbtDoctest exclude ("com.lihaoyi", "geny")),
     // addSbtPlugin("com.typesafe.sbt"    % "sbt-ghpages"     % Versions.sbtGhPages),
     // addSbtPlugin("com.typesafe.sbt"    % "sbt-site"        % Versions.sbtSite),
     addSbtPlugin("de.heikoseeberger" % "sbt-header"      % Versions.sbtHeader),
@@ -48,6 +48,7 @@ lazy val scalafmt = project
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
+    libraryDependencySchemes += "com.lihaoyi" %% "geny" % VersionScheme.Always,
     addSbtPlugin("org.scalameta" % "sbt-scalafmt" % Versions.sbtScalafmt)
   )
   .dependsOn(core)
@@ -60,6 +61,7 @@ lazy val scalajs = project
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
+    libraryDependencySchemes += "com.lihaoyi" %% "geny" % VersionScheme.Always,
     addSbtPlugin("org.scala-js"       % "sbt-scalajs"              % Versions.scalajs),
     addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject" % Versions.scalajsCross)
   )
@@ -73,8 +75,9 @@ lazy val kantan = project
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
-    addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % Versions.sbtSonatype),
-    addSbtPlugin("com.github.sbt" % "sbt-pgp"      % Versions.sbtPgp)
+    libraryDependencySchemes += "com.lihaoyi" %% "geny" % VersionScheme.Always,
+    // addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % Versions.sbtSonatype),
+    addSbtPlugin("com.github.sbt" % "sbt-pgp" % Versions.sbtPgp)
   )
   .dependsOn(core, release, scalafmt)
 
