@@ -75,7 +75,7 @@ object KantanPlugin extends AutoPlugin {
   override lazy val projectSettings = generalSettings ++ scalacSettings ++ javacSettings ++ commonDependencies ++
     inConfig(Compile)(checkStyleSettings) ++ inConfig(Test)(checkStyleSettings)
 
-  /** By default, `checkStyle` does nothing. Other modules, such as scalafmt and scalastyle, plug in to that. */
+  /** By default, `checkStyle` does nothing. Other modules, such as scalafmt, plug in to that. */
   private def checkStyleSettings: Seq[Setting[_]] = Seq(
     checkStyle := {}
   )
