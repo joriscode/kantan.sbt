@@ -1,12 +1,25 @@
 name: CI
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
   pull_request:
-    branches: [master]
+    branches: [master, develop]
 
 jobs:
+  pre_job:
+    name: Skip Duplicate Actions
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5.3.1
+        with:
+          skip_after_successful_duplicate: 'true'
+
   test:
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -16,15 +29,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup
-        uses: olafurpg/setup-scala@v13
+        uses: coursier/setup-action@v1
         with:
-          java-version: "adopt@1.${{ matrix.java }}"
+          jvm: "adopt:${{ matrix.java }}"
 
       - name: Cache
-        uses: coursier/cache-action@v5
+        uses: coursier/cache-action@v6
 
       - name: Test
         run: sbt ++${{ matrix.scala }} validate
