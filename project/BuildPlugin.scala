@@ -62,17 +62,24 @@ object BuildPlugin extends AutoPlugin {
       homepage             := Some(url(s"https://nrinaudo.github.io/kantan.sbt")),
       publishTo := Some(
         if(isSnapshot.value)
-          Opts.resolver.sonatypeSnapshots
+          // Opts.resolver.sonatypeOssSnapshots.head
+          "Github packages" at "https://maven.pkg.github.com/joriscode/_"
         else
           Opts.resolver.sonatypeStaging
       ),
       developers := List(
-        Developer("nrinaudo", "Nicolas Rinaudo", "nicolas@nrinaudo.com", url("https://twitter.com/nicolasrinaudo"))
+        Developer("nrinaudo", "Nicolas Rinaudo", "nicolas@nrinaudo.com", url("https://twitter.com/nicolasrinaudo")),
+        Developer(
+          "joriscode",
+          "Joris",
+          "2750485+joriscode@users.noreply.github.com",
+          url("https://github.com/joriscode")
+        )
       ),
       scmInfo := Some(
         ScmInfo(
-          url(s"https://github.com/nrinaudo/kantan.sbt"),
-          s"scm:git:git@github.com:nrinaudo/kantan.sbt.git"
+          url(s"https://github.com/joriscode/kantan.sbt"),
+          s"scm:git:git@github.com:joriscode/kantan.sbt.git"
         )
       ),
       scalacOptions ++= Seq(
