@@ -16,8 +16,12 @@
 
 package kantan.sbt
 
-import sbt._, Keys._
-import wartremover.{Wart, WartRemover, Warts}
+import sbt._
+import wartremover.Wart
+import wartremover.WartRemover
+import wartremover.Warts
+
+import Keys._
 
 /** Makes compilation much more strict.
   *
@@ -27,9 +31,9 @@ object StrictPlugin extends AutoPlugin {
 
   override def trigger = noTrigger
 
-  override def requires = KantanPlugin && WartRemover
+  override def requires: Plugins = KantanPlugin && WartRemover
 
-  override lazy val projectSettings = wartRemoverSettings ++ scalacSettings
+  override lazy val projectSettings: Seq[Setting[_]] = wartRemoverSettings ++ scalacSettings
 
   /** All warnings are fatal in `Compile`.
     *

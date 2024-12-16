@@ -16,10 +16,13 @@
 
 package kantan.sbt.release
 
-import com.typesafe.sbt.sbtghpages.GhpagesPlugin.autoImport.ghpagesPushSite
-import kantan.sbt.KantanPlugin, KantanPlugin.autoImport._
-import sbt._, Keys._
+import com.github.sbt.sbtghpages.GhpagesPlugin.autoImport.ghpagesPushSite
+import kantan.sbt.KantanPlugin
+import sbt._
 import sbtrelease.ReleasePlugin.autoImport._
+
+import KantanPlugin.autoImport._
+import Keys._
 
 object KantanRelease {
 
