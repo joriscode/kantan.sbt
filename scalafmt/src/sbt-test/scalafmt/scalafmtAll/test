@@ -3,7 +3,8 @@
 # Test files, SBT files and main files all have errors.
 -> scalafmtSbtCheck
 -> scalafmtCheck
--> Test/scalafmtcheck
+-> scalafmtCheckAll
+-> Test/scalafmtCheck
 -> checkStyle
 -> Test/checkStyle
 

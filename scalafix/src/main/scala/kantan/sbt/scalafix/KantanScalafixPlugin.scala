@@ -49,7 +49,7 @@ object KantanScalafixPlugin extends AutoPlugin {
     copyScalafixConfig := {
       val path = scalafixConfig.value.getOrElse(file(".scalafix.conf"))
 
-      scalafixResource.value.foreach(r => Resources.copyIfNeeded(r, path))
+      scalafixResource.value.foreach(Resources.copyIfNeeded(_, path))
     }
   )
 
