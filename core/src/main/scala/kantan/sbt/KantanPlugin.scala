@@ -108,7 +108,7 @@ object KantanPlugin extends AutoPlugin {
 
   def javacSettings: Seq[Setting[_]] = {
     // Compile everything to 1.8 until further notice.
-    val jvm = "1.8"
+    val jvm = "1.11"
 
     Seq(
       javacOptions := Seq("-source", jvm, "-target", jvm)
