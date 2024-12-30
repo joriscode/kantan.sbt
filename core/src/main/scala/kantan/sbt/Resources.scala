@@ -16,10 +16,13 @@
 
 package kantan.sbt
 
+import sbt._
+
 import java.io._
 import java.net.URL
 import java.security.MessageDigest
-import sbt._, io.Using
+
+import io.Using
 
 object Resources {
 

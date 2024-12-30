@@ -15,7 +15,14 @@ object BuildPlugin extends AutoPlugin {
   override def globalSettings: Seq[Setting[_]] =
     addCommandAlias(
       "validate",
-      ";clean;scalastyle;Test / scalastyle;scalafmtCheck;Test / scalafmtCheck;scalafmtSbtCheck;compile;scripted"
+      "; clean"
+        + "; scalafix --check"
+        + "; scalafmtSbtCheck"
+        + "; scalafmtCheck"
+        + "; Test / scalafix --check"
+        + "; Test / scalafmtCheck"
+        + "; compile"
+        + "; scripted"
     )
 
   lazy val runScripted: ReleaseStep = {
@@ -36,7 +43,7 @@ object BuildPlugin extends AutoPlugin {
         checkSnapshotDependencies,
         inquireVersions,
         runClean,
-        releaseStepCommand("scalastyle"),
+        releaseStepCommand("scalafix"),
         releaseStepCommand("scalafmtCheck"),
         releaseStepCommand("scalafmtSbtCheck"),
         runScripted,
@@ -77,17 +84,23 @@ object BuildPlugin extends AutoPlugin {
       organizationHomepage := Some(url("https://nrinaudo.github.io")),
       organizationName     := "Nicolas Rinaudo",
       startYear            := Some(2016),
-      scalaVersion         := "2.12.15",
+      scalaVersion         := "2.12.20",
       licenses             := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.html")),
       homepage             := Some(url(s"https://nrinaudo.github.io/kantan.sbt")),
       publishTo := Some(
         if(isSnapshot.value)
-          Opts.resolver.sonatypeSnapshots
+          Opts.resolver.sonatypeOssSnapshots.head
         else
           Opts.resolver.sonatypeStaging
       ),
       developers := List(
-        Developer("nrinaudo", "Nicolas Rinaudo", "nicolas@nrinaudo.com", url("https://twitter.com/nicolasrinaudo"))
+        Developer("nrinaudo", "Nicolas Rinaudo", "nicolas@nrinaudo.com", url("https://twitter.com/nicolasrinaudo")),
+        Developer(
+          "joriscode",
+          "Joris",
+          "2750485+joriscode@users.noreply.github.com",
+          url("https://github.com/joriscode")
+        )
       ),
       scmInfo := Some(
         ScmInfo(
@@ -154,6 +167,7 @@ object SbtBuildPlugin extends AutoPlugin {
   override def requires = SbtPlugin
 
   override lazy val projectSettings = Seq(
-    scriptedLaunchOpts ++= Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
+    scriptedLaunchOpts ++= Seq("-Xmx1024M", s"-Dplugin.version=${version.value}"),
+    scriptedBufferLog   := false
   )
 }

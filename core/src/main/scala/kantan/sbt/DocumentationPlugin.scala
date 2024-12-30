@@ -16,29 +16,36 @@
 
 package kantan.sbt
 
-import com.typesafe.sbt.sbtghpages.GhpagesPlugin, GhpagesPlugin.autoImport._
-import com.typesafe.sbt.site.SitePlugin, SitePlugin.autoImport.makeSite
+import com.github.sbt.sbtghpages.GhpagesPlugin
+import com.typesafe.sbt.site.SitePlugin
 import com.typesafe.sbt.site.SitePlugin.autoImport.siteSubdirName
 import com.typesafe.sbt.site.preprocess.PreprocessPlugin
 import com.typesafe.sbt.site.preprocess.PreprocessPlugin.autoImport._
 import com.typesafe.sbt.site.util.SiteHelpers._
-import mdoc.MdocPlugin, MdocPlugin.autoImport._
-import sbt._, Keys._, ScopeFilter.ProjectFilter
+import mdoc.MdocPlugin
+import sbt._
 import sbtunidoc.BaseUnidocPlugin.autoImport._
 import sbtunidoc.ScalaUnidocPlugin
 import sbtunidoc.ScalaUnidocPlugin.autoImport._
 
+import GhpagesPlugin.autoImport._
+import SitePlugin.autoImport.makeSite
+import MdocPlugin.autoImport._
+import Keys._
+import ScopeFilter.ProjectFilter
+
 /** Plugin for documentation projects.
   *
   * Enabling this will set things up so that:
-  *  - `makeSite` compiles all mdoc files, generates the unidoc API and builds a complete documentation site.
-  *  - `ghpagesPushSite` generates the site and pushes it to the current repository's github pages.
+  *   - `makeSite` compiles all mdoc files, generates the unidoc API and builds a complete documentation site.
+  *   - `ghpagesPushSite` generates the site and pushes it to the current repository's github pages.
   */
 object DocumentationPlugin extends AutoPlugin {
 
   override def trigger = noTrigger
 
-  override def requires = PreprocessPlugin && UnpublishedPlugin && ScalaUnidocPlugin && GhpagesPlugin && MdocPlugin
+  override def requires: Plugins =
+    PreprocessPlugin && UnpublishedPlugin && ScalaUnidocPlugin && GhpagesPlugin && MdocPlugin
 
   object autoImport {
 
@@ -48,8 +55,10 @@ object DocumentationPlugin extends AutoPlugin {
     def inProjectsIf(predicate: Boolean)(projects: ProjectReference*): ProjectFilter =
       if(predicate) inProjects(projects: _*)
       else inProjects()
-    val mdocSite    = taskKey[Seq[(File, String)]]("create mdoc documentation in a way that lets sbt-site grab it")
-    val mdocSiteOut = settingKey[String]("name of the directory in which sbt-site will store mdoc documentation")
+    val mdocSite: TaskKey[Seq[(File, String)]] =
+      taskKey[Seq[(File, String)]]("create mdoc documentation in a way that lets sbt-site grab it")
+    val mdocSiteOut: SettingKey[String] =
+      settingKey[String]("name of the directory in which sbt-site will store mdoc documentation")
   }
 
   import autoImport._
