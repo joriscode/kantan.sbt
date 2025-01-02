@@ -92,7 +92,8 @@ object LocalBuildPlugin extends AutoPlugin {
       versionScheme        := Some("early-semver"),
       publishTo := Some(
         if(isSnapshot.value)
-          Opts.resolver.sonatypeOssSnapshots.head
+          // Opts.resolver.sonatypeOssSnapshots.head
+          "Github packages".at("https://maven.pkg.github.com/joriscode/kantan.sbt")
         else
           Opts.resolver.sonatypeStaging
       ),
