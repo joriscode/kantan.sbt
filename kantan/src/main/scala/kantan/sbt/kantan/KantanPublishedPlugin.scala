@@ -17,6 +17,7 @@
 package kantan.sbt.kantan
 
 import kantan.sbt.PublishedPlugin
+import kantan.sbt.kantan.KantanKantanPlugin.autoImport.kantanProject
 import kantan.sbt.release.KantanReleasePlugin
 import sbt.Keys._
 import sbt._
@@ -33,7 +34,8 @@ object KantanPublishedPlugin extends AutoPlugin {
   override lazy val projectSettings: Seq[Setting[_]] = Seq(
     publishTo := Some(
       if(isSnapshot.value)
-        Opts.resolver.sonatypeOssSnapshots.head
+        // Opts.resolver.sonatypeOssSnapshots.head
+        "Github packages".at(s"https://maven.pkg.github.com/joriscode/${kantanProject.value}")
       else
         Opts.resolver.sonatypeStaging
     ),
