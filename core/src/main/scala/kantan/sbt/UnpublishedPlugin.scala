@@ -17,10 +17,10 @@
 package kantan.sbt
 
 import sbt.AutoPlugin
+import sbt.Def
 import sbt.Keys._
 import sbt.Resolver
 import sbt.file
-import sbt.Def
 
 /** Configures projects whose artifacts are not meant for publication to maven central.
   *
