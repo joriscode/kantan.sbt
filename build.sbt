@@ -3,7 +3,7 @@ lazy val root = Project(id = "kantan-sbt", base = file("."))
   .settings(
     publish         := {},
     publishLocal    := {},
-    publishArtifact := false
+    publishArtifact := false,
   )
   .aggregate(docs, core, kantan, release, scalajs, scalafix, scalafmt)
 
@@ -11,7 +11,7 @@ lazy val core = project
   .settings(
     moduleName := "kantan.sbt",
     name       := "core",
-    sbtPlugin  := true
+    sbtPlugin  := true,
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
@@ -33,7 +33,7 @@ lazy val release = project
   .settings(
     moduleName := "kantan.sbt-release",
     name       := "release",
-    sbtPlugin  := true
+    sbtPlugin  := true,
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
@@ -46,7 +46,7 @@ lazy val scalafix = project
   .settings(
     moduleName := "kantan.sbt-scalafix",
     name       := "scalafix",
-    sbtPlugin  := true
+    sbtPlugin  := true,
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
@@ -58,7 +58,7 @@ lazy val scalafmt = project
   .settings(
     moduleName := "kantan.sbt-scalafmt",
     name       := "scalafmt",
-    sbtPlugin  := true
+    sbtPlugin  := true,
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
@@ -73,12 +73,12 @@ lazy val scalajs = project
   .settings(
     moduleName := "kantan.sbt-scalajs",
     name       := "scalajs",
-    sbtPlugin  := true
+    sbtPlugin  := true,
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
     addSbtPlugin("org.scala-js"       % "sbt-scalajs"              % Versions.scalajs),
-    addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject" % Versions.scalajsCross)
+    addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject" % Versions.scalajsCross),
   )
   .dependsOn(core)
 
@@ -86,14 +86,14 @@ lazy val kantan = project
   .settings(
     moduleName := "kantan.sbt-kantan",
     name       := "kantan",
-    sbtPlugin  := true
+    sbtPlugin  := true,
   )
   .enablePlugins(AutomateHeaderPlugin, SbtPlugin)
   .settings(
     addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % Versions.sbtSonatype),
-    addSbtPlugin("com.github.sbt" % "sbt-pgp"      % Versions.sbtPgp)
+    addSbtPlugin("com.github.sbt" % "sbt-pgp"      % Versions.sbtPgp),
   )
   .dependsOn(core, release, scalafix, scalafmt)
 
 lazy val docs = project
-  .enablePlugins(DocumentationPlugin)
+  .enablePlugins(LocalDocumentationPlugin)

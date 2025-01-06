@@ -5,10 +5,13 @@ import sbt.ScriptedPlugin.autoImport._
 import sbtrelease.ReleasePlugin, ReleasePlugin.autoImport._, ReleaseTransformations._, ReleaseKeys._
 import wartremover.{Wart, WartRemover, Warts}
 import scalafix.sbt.ScalafixPlugin.autoImport.scalafixSemanticdb
-object BuildPlugin extends AutoPlugin {
-  override def trigger = allRequirements
 
-  override def requires = JvmPlugin && ReleasePlugin
+object LocalBuildPlugin extends AutoPlugin {
+  override def trigger =
+    allRequirements
+
+  override def requires =
+    JvmPlugin && ReleasePlugin
 
   override lazy val projectSettings = baseSettings ++ wartRemoverSettings ++ releaseSettings
 
@@ -22,7 +25,7 @@ object BuildPlugin extends AutoPlugin {
         + "; Test / scalafix --check"
         + "; Test / scalafmtCheck"
         + "; compile"
-        + "; scripted"
+        + "; scripted",
     )
 
   lazy val runScripted: ReleaseStep = {
@@ -31,8 +34,7 @@ object BuildPlugin extends AutoPlugin {
       action = { st: State =>
         if(!st.get(skipTests).getOrElse(false)) {
           scriptedStep(st)
-        }
-        else st
+        } else st
       }
     )
   }
@@ -56,7 +58,7 @@ object BuildPlugin extends AutoPlugin {
         releaseStepCommand("ghpagesPushSite"),
         setNextVersion,
         commitNextVersion,
-        pushChanges
+        pushChanges,
       )
     )
 
@@ -73,7 +75,7 @@ object BuildPlugin extends AutoPlugin {
             Wart.ImplicitConversion,
             Wart.Any,
             Wart.PublicInference,
-            Wart.Recursion
+            Wart.Recursion,
           )
       )
     }
@@ -100,13 +102,13 @@ object BuildPlugin extends AutoPlugin {
           "joriscode",
           "Joris",
           "2750485+joriscode@users.noreply.github.com",
-          url("https://github.com/joriscode")
-        )
+          url("https://github.com/joriscode"),
+        ),
       ),
       scmInfo := Some(
         ScmInfo(
           url(s"https://github.com/nrinaudo/kantan.sbt"),
-          s"scm:git:git@github.com:nrinaudo/kantan.sbt.git"
+          s"scm:git:git@github.com:nrinaudo/kantan.sbt.git",
         )
       ),
       scalacOptions ++= Seq(
@@ -157,22 +159,24 @@ object BuildPlugin extends AutoPlugin {
         "-Ywarn-unused:privates",
         "-Ywarn-value-discard",
         "-Ybackend-parallelism",
-        java.lang.Runtime.getRuntime().availableProcessors().toString
+        java.lang.Runtime.getRuntime().availableProcessors().toString,
       ),
       // Enable scalafix semantic rules
       semanticdbEnabled      := true,
       semanticdbIncludeInJar := false,
-      semanticdbVersion      := scalafixSemanticdb.revision
+      semanticdbVersion      := scalafixSemanticdb.revision,
     )
 }
 
-object SbtBuildPlugin extends AutoPlugin {
-  override def trigger = allRequirements
+object SbtLocalBuildPlugin extends AutoPlugin {
+  override def trigger =
+    allRequirements
 
-  override def requires = SbtPlugin
+  override def requires =
+    SbtPlugin
 
   override lazy val projectSettings = Seq(
     scriptedLaunchOpts ++= Seq("-Xmx1024M", s"-Dplugin.version=${version.value}"),
-    scriptedBufferLog   := false
+    scriptedBufferLog   := false,
   )
 }
