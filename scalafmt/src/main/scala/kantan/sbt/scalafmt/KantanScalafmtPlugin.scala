@@ -16,10 +16,13 @@
 
 package kantan.sbt.scalafmt
 
-import kantan.sbt.KantanPlugin, KantanPlugin.autoImport._
+import kantan.sbt.KantanPlugin
 import kantan.sbt.Resources
-import org.scalafmt.sbt.ScalafmtPlugin, ScalafmtPlugin.autoImport._
+import org.scalafmt.sbt.ScalafmtPlugin
 import sbt._
+
+import KantanPlugin.autoImport._
+import ScalafmtPlugin.autoImport._
 
 /** Provides support for shared scalafmt configuration files. */
 object KantanScalafmtPlugin extends AutoPlugin {
@@ -32,9 +35,9 @@ object KantanScalafmtPlugin extends AutoPlugin {
 
   override def trigger = allRequirements
 
-  override def requires = KantanPlugin && ScalafmtPlugin
+  override def requires: Plugins = KantanPlugin && ScalafmtPlugin
 
-  override lazy val projectSettings = rawScalafmtSettings(Compile, Test) ++ checkStyleSettings ++ Seq(
+  override lazy val projectSettings: Seq[Setting[_]] = rawScalafmtSettings(Compile, Test) ++ checkStyleSettings ++ Seq(
     scalafmtResource := None,
     scalafmtAll      := scalafmtAll.dependsOn(Compile / scalafmtSbt).value,
     copyScalafmtConfig := {

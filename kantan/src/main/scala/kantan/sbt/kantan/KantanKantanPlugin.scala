@@ -19,10 +19,15 @@ package kantan.sbt.kantan
 import com.github.sbt.git.SbtGit.git
 import com.jsuereth.sbtpgp.PgpKeys.publishSigned
 import kantan.sbt.release.KantanRelease
-import kantan.sbt.scalafix.KantanScalafixPlugin, KantanScalafixPlugin.autoImport._
-import kantan.sbt.scalafmt.KantanScalafmtPlugin, KantanScalafmtPlugin.autoImport._
-import sbt._, Keys._
-import sbtrelease.ReleasePlugin.autoImport._, ReleaseTransformations._
+import kantan.sbt.scalafix.KantanScalafixPlugin
+import kantan.sbt.scalafmt.KantanScalafmtPlugin
+import sbt._
+import sbtrelease.ReleasePlugin.autoImport._
+
+import KantanScalafixPlugin.autoImport._
+import KantanScalafmtPlugin.autoImport._
+import Keys._
+import ReleaseTransformations._
 
 /** Plugin that sets kantan-specific values.
   *
@@ -42,9 +47,9 @@ object KantanKantanPlugin extends AutoPlugin {
 
   override def trigger = allRequirements
 
-  override def requires = KantanScalafixPlugin && KantanScalafmtPlugin
+  override def requires: Plugins = KantanScalafixPlugin && KantanScalafmtPlugin
 
-  override lazy val projectSettings = generalSettings ++ remoteSettings
+  override lazy val projectSettings: Seq[Setting[_]] = generalSettings ++ remoteSettings
 
   @SuppressWarnings(Array("org.wartremover.warts.IterableOps"))
   lazy val generalSettings: Seq[Setting[_]] = Seq(

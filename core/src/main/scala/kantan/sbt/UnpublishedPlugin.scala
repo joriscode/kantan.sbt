@@ -16,8 +16,11 @@
 
 package kantan.sbt
 
-import sbt.{file, AutoPlugin, Resolver}
+import sbt.AutoPlugin
 import sbt.Keys._
+import sbt.Resolver
+import sbt.file
+import sbt.Def
 
 /** Configures projects whose artifacts are not meant for publication to maven central.
   *
@@ -25,7 +28,7 @@ import sbt.Keys._
   */
 object UnpublishedPlugin extends AutoPlugin {
 
-  override def projectSettings = Seq(
+  override def projectSettings: Seq[Def.Setting[_]] = Seq(
     // List of settings grabbed from https://github.com/scala/scala-parallel-collections/pull/14.
     makePom         := file(""),
     deliver         := file(""),

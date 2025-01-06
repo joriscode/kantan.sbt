@@ -17,15 +17,17 @@
 package kantan.sbt
 package scalajs
 
-import KantanPlugin.autoImport.checkStyle
-import KantanPlugin.setLaws
 import com.github.tkawachi.doctest.DoctestPlugin.autoImport._
-import sbt._, Keys._
+import sbt._
 import sbtcrossproject.CrossPlugin.autoImport._
 import sbtcrossproject.CrossProject
 import scalajscrossproject.ScalaJSCrossPlugin.autoImport._
 import scoverage.ScoverageKeys.coverageEnabled
 import spray.boilerplate.BoilerplatePlugin.autoImport.boilerplateSource
+
+import KantanPlugin.autoImport.checkStyle
+import KantanPlugin.setLaws
+import Keys._
 
 object KantanScalaJsPlugin extends AutoPlugin {
 
@@ -34,10 +36,10 @@ object KantanScalaJsPlugin extends AutoPlugin {
   override def requires = KantanPlugin
 
   object autoImport {
-    lazy val testJS        = taskKey[Unit]("run tests for JS projects only")
-    lazy val testJVM       = taskKey[Unit]("run tests for JVM projects only")
-    lazy val checkStyleJS  = taskKey[Unit]("run style checks for JS projects only")
-    lazy val checkStyleJVM = taskKey[Unit]("run style checks for JVM projects only")
+    lazy val testJS: TaskKey[Unit]        = taskKey[Unit]("run tests for JS projects only")
+    lazy val testJVM: TaskKey[Unit]       = taskKey[Unit]("run tests for JVM projects only")
+    lazy val checkStyleJS: TaskKey[Unit]  = taskKey[Unit]("run style checks for JS projects only")
+    lazy val checkStyleJVM: TaskKey[Unit] = taskKey[Unit]("run style checks for JVM projects only")
 
     // format: off
     def kantanCrossProject(id: String): CrossProject =
@@ -67,7 +69,7 @@ object KantanScalaJsPlugin extends AutoPlugin {
         // format: on
 
     /** Adds a `.laws` method for scala.js projects. */
-    implicit class KantanJsOperations(val proj: CrossProject) extends AnyVal {
+    implicit class KantanJsOperations(private val proj: CrossProject) extends AnyVal {
       def laws(name: String): CrossProject =
         proj
           .jvmSettings(setLaws(name + ""))
